@@ -1,6 +1,6 @@
 {
   "name": "validat",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Validation of input parameters in the GulfStream package.",
   "main": "index.js",
   "keywords": [
@@ -22,7 +22,7 @@
   },
   "homepage": "https://gulfstream.to",
   "dependencies": {
-    "metator": "0.0.1"
+    "metator": "0.0.2"
   },
   "devDependencies": {
     "mocha": "^6.1.4"
