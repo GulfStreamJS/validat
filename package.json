@@ -1,0 +1,30 @@
+{
+  "name": "validat",
+  "version": "0.0.1",
+  "description": "Validation of input parameters in the GulfStream package.",
+  "main": "index.js",
+  "keywords": [
+    "validation",
+    "valid",
+    "parameters",
+    "gulfstream"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GulfStreamJS/validat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GulfStreamJS/validat/issues"
+  },
+  "homepage": "https://gulfstream.to",
+  "dependencies": {
+    "metator": "0.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4"
+  }
+}
