@@ -1,10 +1,10 @@
 const validat = require('../');
 
 describe('Validation', function() {
-    describe('#()', function() {
+    describe('#input()', function() {
         this.timeout(30000);
-        it('validation without error', function (done) {
-            validat({
+        it('input validation without error', function (done) {
+            validat.input({
                 "source": "3652DB1AFBC5D414DBCAF5920F741FF93B1ED9E5",
                 "imdb_id": "0944947",
                 "tmdb_id": 1399,
@@ -30,12 +30,34 @@ describe('Validation', function() {
                 return done(error);
             });
         });
-        it('validation with error', function (done) {
-            validat({
+        it('input validation with error', function (done) {
+            validat.input({
                 "source": "1CB2ED9B9790616848E217910D30C7C8D364BFFB"
             }).catch(error => {
                 if (error.message === 'NO torrent, NO video!') return done();
                 return done(error);
+            });
+        });
+    });
+    describe('#output()', function() {
+        this.timeout(30000);
+        it('output validation without error', function (done) {
+            validat.output({
+                "imdb_id": "4688388",
+                "name": "Hello World",
+                "otherKey": "otherValue"
+            }).then(params => {
+                if (params.name === 'Hello World') return done();
+                else return done('Error!');
+            }).catch(error => {
+                return done(error);
+            });
+        });
+        it('output validation with error', function (done) {
+            validat.output({
+                "name": "Hello World"
+            }).catch(() => {
+                return done();
             });
         });
     });

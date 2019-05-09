@@ -19,7 +19,7 @@ const validat = require('validat');
 ### Validation input params
 
 ```js
-validat({
+validat.input({
     "source": "3652DB1AFBC5D414DBCAF5920F741FF93B1ED9E5",
     "imdb_id": "0944947",
     "tmdb_id": 1399,
@@ -64,6 +64,20 @@ validat({
 //  adult: 'The video title',
 //  oauth: { login: 'user' },
 //  metafilm: { name: 'Title' } }
+```
+
+### Validation output params
+
+```js
+validat.output({
+    "imdb_id": "4688388",
+    "name": "Hello World",
+    "otherKey": "otherValue"
+}).then(params => {
+    console.log(params);
+});
+//{ imdb_id: '4688388',
+//  name: 'Hello World' }
 ```
 
 ## Running tests
