@@ -1,4 +1,4 @@
-const ajv = new (require('ajv'))({removeAdditional: true});
+const ajv = new (require('ajv'))({removeAdditional: 'all'});
 
 module.exports.input = params => {
 
@@ -479,6 +479,7 @@ module.exports.output = params => {
                     minItems: 1,
                     items: {
                         type: 'object',
+                        additionalProperties: false,
                         required: ['name', 'file', 'size', 'sha1', 'hosting'],
                         properties: {
                             imdb_id: {
