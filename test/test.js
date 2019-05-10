@@ -24,7 +24,7 @@ describe('Validation', function() {
                 "oauth": "{\"login\":\"user\"}",
                 "metafilm": "{\"name\":\"Title\"}"
             }).then(params => {
-                if (params.proxy[0].host === '192.168.0.1') return done();
+                if (params.episode[1] === '2') return done();
                 else return done('Error!');
             }).catch(error => {
                 return done(error);
