@@ -1,7 +1,7 @@
 const validat = require('../');
 
-describe('Validation', function() {
-    describe('#input()', function() {
+describe('Validation', function () {
+    describe('#input()', function () {
         this.timeout(30000);
         it('input validation without error', function (done) {
             validat.input({
@@ -39,7 +39,7 @@ describe('Validation', function() {
             });
         });
     });
-    describe('#output()', function() {
+    describe('#output()', function () {
         this.timeout(30000);
         it('output validation without error', function (done) {
             validat.output({
