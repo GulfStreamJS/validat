@@ -26,36 +26,38 @@ module.exports.input = params => {
     });
 
     ['season', 'episode'].forEach(key => {
-        switch (typeof params[key]) {
-            case 'number':
-                params[key] = [params[key].toString()];
-                break;
-            case 'object':
-                params[key] = params[key]
-                    .map(v => v.toString().replace(/[^0-9]/g, ''))
-                    .filter(Boolean);
-                break;
-            case 'string':
-                if (/^[0-9]{1,3}$/i.test(params[key])) {
-                    params[key] = [params[key]];
-                } else if (/^[0-9]{1,3}-[0-9]{1,3}$/i.test(params[key])) {
-                    let [start, finish] = params[key].split('-').map(i => parseInt(i));
-                    if (start > finish) [start, finish] = [finish, start];
-                    params[key] = [];
-                    for (let i = start; i <= finish; i++) {
-                        params[key].push(i.toString());
-                    }
-                } else if (/^[0-9]{1,3},/i.test(params[key])) {
+        if (typeof params[key] !== 'undefined') {
+            switch (typeof params[key]) {
+                case 'number':
+                    params[key] = [params[key].toString()];
+                    break;
+                case 'object':
                     params[key] = params[key]
-                        .split(',')
-                        .map(v => v.replace(/[^0-9]/g, ''))
-                        .filter(Boolean)
-                } else {
+                        .map(v => v.toString().replace(/[^0-9]/g, ''))
+                        .filter(Boolean);
+                    break;
+                case 'string':
+                    if (/^[0-9]{1,3}$/i.test(params[key])) {
+                        params[key] = [params[key]];
+                    } else if (/^[0-9]{1,3}-[0-9]{1,3}$/i.test(params[key])) {
+                        let [start, finish] = params[key].split('-').map(i => parseInt(i));
+                        if (start > finish) [start, finish] = [finish, start];
+                        params[key] = [];
+                        for (let i = start; i <= finish; i++) {
+                            params[key].push(i.toString());
+                        }
+                    } else if (/^[0-9]{1,3},/i.test(params[key])) {
+                        params[key] = params[key]
+                            .split(',')
+                            .map(v => v.replace(/[^0-9]/g, ''))
+                            .filter(Boolean)
+                    } else {
+                        params[key] = '';
+                    }
+                    break;
+                default:
                     params[key] = '';
-                }
-                break;
-            default:
-                params[key] = '';
+            }
         }
     });
 

@@ -1,6 +1,6 @@
 {
   "name": "validat",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "Validation of input parameters in the GulfStream package.",
   "main": "index.js",
   "keywords": [
