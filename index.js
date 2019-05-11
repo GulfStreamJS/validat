@@ -61,7 +61,7 @@ module.exports.input = (params = {}) => {
         }
     });
 
-    ['tmdb_key', 'imdb_key', 'quality', 'release', 'proxy', 'adult'].forEach(key => {
+    ['tmdb_key', 'imdb_key', 'quality', 'release', 'adult'].forEach(key => {
         if (typeof params[key] !== 'undefined') {
             params[key] = (params[key]).toString();
             params[key] = params[key]
@@ -82,10 +82,12 @@ module.exports.input = (params = {}) => {
     if (typeof params.metafilm !== 'undefined') {
         params.metafilm = (params.metafilm).toString();
         try {
-            params.metafilm = JSON.parse(params.metafilm);
+            let metafilm = JSON.parse(params.metafilm);
+            params = {...params, ...metafilm};
         } catch (e) {
             params.metafilm = {};
         }
+        delete params.metafilm;
     }
 
     if (typeof params.proxy !== 'undefined') {
@@ -116,11 +118,15 @@ module.exports.input = (params = {}) => {
 
     return Promise.all([
         require('metator').isvi(params.source),
-        require('metator').isto(params.source)
+        require('metator').isto(params.source),
+        require('metator').info(params.source)
     ]).then(is => {
-        let [video, torrent] = is;
+        let [video, torrent, info] = is;
         if (!video && !torrent) {
             return Promise.reject({message: 'NO torrent, NO video!', value: params.source});
+        }
+        if (video && info) {
+            params.downloat = info;
         }
         return params;
     }).then(params => {
@@ -129,7 +135,7 @@ module.exports.input = (params = {}) => {
             if (params[key] === '') bad.push(key);
         });
         if (bad.length) {
-            return Promise.reject({message: 'Bad data!', value: bad.join(' | ')});
+            return Promise.reject({message: 'The parameters is required!', value: bad.join(' | ')});
         }
         return Promise.resolve(params);
     });
