@@ -75,7 +75,7 @@ module.exports.input = (params = {}) => {
         try {
             params.oauth = JSON.parse(params.oauth);
         } catch (e) {
-            params.oauth = '';
+            params.oauth = {};
         }
     }
 
@@ -488,7 +488,7 @@ module.exports.output = (params = {}) => {
                     items: {
                         type: 'object',
                         additionalProperties: false,
-                        required: ['name', 'file', 'size', 'sha1', 'hosting'],
+                        required: ['name', 'file', 'size', 'sha1', 'storage'],
                         properties: {
                             imdb_id: {
                                 type: 'string',
@@ -579,7 +579,7 @@ module.exports.output = (params = {}) => {
                                 minLength: 40,
                                 maxLength: 40
                             },
-                            hosting: {
+                            storage: {
                                 type: 'array',
                                 minItems: 1,
                                 items: {
