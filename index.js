@@ -128,6 +128,31 @@ module.exports.input = (params = {}) => {
         if (video && info) {
             params.downloat = info;
         }
+        if (
+            info &&
+            info.length &&
+            typeof params.season === 'undefined' &&
+            typeof params.episode === 'undefined'
+        ) {
+            info.forEach(current => {
+                if (typeof current.season !== 'undefined') {
+                    if (params.season && params.season.length) {
+                        params.season.push(current.season.toString());
+                    }
+                    else {
+                        params.season = [current.season.toString()];
+                    }
+                }
+                if (typeof current.episode !== 'undefined') {
+                    if (params.episode && params.episode.length) {
+                        params.episode.push(current.episode.toString());
+                    }
+                    else {
+                        params.episode = [current.episode.toString()];
+                    }
+                }
+            });
+        }
         return params;
     }).then(params => {
         let bad = [];
